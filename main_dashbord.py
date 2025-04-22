@@ -1,5 +1,5 @@
 # %%
-
+import os
 import pandas as pd
 import streamlit as st
 # %matplotlib inline
@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import seaborn as sns
 import numpy as np
-
 
 # %%
 def columns_datatype_change(df):
@@ -49,10 +48,10 @@ def bar_line_plot(df,x_columun,y_columun1,y_columun2,title):
     # ax2の凡例は削除
     ax2.get_legend().remove()
     #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax1.set_xlabel('')
-    ax1.set_ylabel('売上[USドル]',fontsize=15)
-    ax2.set_ylabel('利益率[%]',fontsize=15)
+    plt.title(title,fontsize=15, fontproperties=font_prop)
+    ax1.set_xlabel('', fontproperties=font_prop)
+    ax1.set_ylabel('売上[USドル]',fontsize=15, fontproperties=font_prop)
+    ax2.set_ylabel('利益率[%]',fontsize=15, fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
@@ -82,10 +81,10 @@ def stakedbar_line_plot(df,x_columun,y_columun1,y_columun2,stacked_columun1,titl
     ax1.legend(loc="lower left",fontsize=10)
     ax2.legend(loc="lower right",fontsize=10)
     #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax1.set_xlabel('')
-    ax1.set_ylabel('売上[USドル]',fontsize=15)
-    ax2.set_ylabel('利益率[%]',fontsize=15)
+    plt.title(title,fontsize=15, fontproperties=font_prop)
+    ax1.set_xlabel('', fontproperties=font_prop)
+    ax1.set_ylabel('売上[USドル]',fontsize=15, fontproperties=font_prop)
+    ax2.set_ylabel('利益率[%]',fontsize=15, fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
@@ -102,10 +101,10 @@ def bar_plot(df,x_columun,y_columun,y_rabel,title,rotation):
     sns.barplot(x = 'x_numeric', y = y_columun, data = df,ax=ax,color='gray')
     plt.xticks(rotation=rotation)
     #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax.set_xlabel('')
+    plt.title(title,fontsize=15, fontproperties=font_prop)
+    ax.set_xlabel('', fontproperties=font_prop)
     ax.set_ylim([0, df[y_columun].max()*1.1])
-    ax.set_ylabel(y_rabel,fontsize=10)
+    ax.set_ylabel(y_rabel,fontsize=10, fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
@@ -129,9 +128,9 @@ def stakedbar_plot(df,x_columun,y_columun,stacked_columun,title,rotation):
     # 凡例の位置とフォントサイズを変更
     ax.legend(loc="lower left",fontsize=10)
     #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax.set_xlabel('')
-    ax.set_ylabel('売上[USドル]',fontsize=15)
+    plt.title(title,fontsize=15, fontproperties=font_prop)
+    ax.set_xlabel('', fontproperties=font_prop)
+    ax.set_ylabel('売上[USドル]',fontsize=15, fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
@@ -148,9 +147,9 @@ def catplot_strip(df,x_columun,y_columun,y_rabel,title):
     sns.stripplot(x = 'x_numeric', y = y_columun, data = df,ax=ax,color='gray')
     plt.xticks(rotation=90)
     #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax.set_xlabel('')
-    ax.set_ylabel(y_rabel,fontsize=10)
+    plt.title(title,fontsize=15, fontproperties=font_prop)
+    ax.set_xlabel('', fontproperties=font_prop)
+    ax.set_ylabel(y_rabel,fontsize=10, fontproperties=font_prop)
     ax.axhline(y=0, color='orange', linestyle='--')
     plt.tight_layout()
     return fig
@@ -169,7 +168,7 @@ def line_plot(df,x_columun,y_columun,y_rabel,title):
     ax.set_xlabel('')
     if title=='リピート率推移※2014は初年度のため無し':
         plt.xticks(df['year'])
-    ax.set_ylabel(y_rabel,fontsize=10)
+    ax.set_ylabel(y_rabel,fontsize=10, fontproperties=font_prop)
     plt.tight_layout()
     return fig
 def reg_plot(df,x_columun,y_columun,x_rabel,y_rabel,title):
@@ -182,11 +181,14 @@ def reg_plot(df,x_columun,y_columun,x_rabel,y_rabel,title):
     # グラフ描画
     sns.regplot( x=x_columun, y=y_columun, data=df, ax=ax, color='gray')
     #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax.set_xlabel(x_rabel,fontsize=10)
-    ax.set_ylabel(y_rabel,fontsize=10)
+    plt.title(title,fontsize=15, fontproperties=font_prop)
+    ax.set_xlabel(x_rabel,fontsize=10, fontproperties=font_prop)
+    ax.set_ylabel(y_rabel,fontsize=10, fontproperties=font_prop)
     plt.tight_layout()
     return fig
+
+# %% [markdown]
+# 
 
 # %%
 #元データ読み込み
@@ -356,6 +358,7 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="main_dashboard", layout="wide")
+st.write("使用フォント名:", font_prop.get_name())
 
 # CSSによる全体書式
 st.markdown("""
