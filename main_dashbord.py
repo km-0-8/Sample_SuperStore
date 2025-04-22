@@ -6,7 +6,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-plt.rcParams['font.family'] = 'IPAexGothic'
+plt.rcParams['font.family'] = 'Noto Sans CJK JP'
 
 # %%
 def columns_datatype_change(df):
