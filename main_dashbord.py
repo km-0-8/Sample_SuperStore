@@ -44,7 +44,7 @@ def bar_line_plot(df,x_columun,y_columun1,y_columun2,title):
     handler1, label1 = ax1.get_legend_handles_labels()
     handler2, label2 = ax2.get_legend_handles_labels()
     # ax1で凡例をまとめて表示
-    ax1.legend(handler1 + handler2, label1 + label2, loc="lower left",fontsize=10)
+    ax1.legend(handler1 + handler2, label1 + label2, loc="lower left",fontsize=10, prop=font_prop)
     # ax2の凡例は削除
     ax2.get_legend().remove()
     #タイトル、軸ラベルの設定
@@ -52,6 +52,7 @@ def bar_line_plot(df,x_columun,y_columun1,y_columun2,title):
     ax1.set_xlabel('', fontproperties=font_prop)
     ax1.set_ylabel('売上[USドル]',fontsize=15, fontproperties=font_prop)
     ax2.set_ylabel('利益率[%]',fontsize=15, fontproperties=font_prop)
+    ax1.set_xticklabels(ax1.get_xticklabels(), fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
@@ -78,13 +79,14 @@ def stakedbar_line_plot(df,x_columun,y_columun1,y_columun2,stacked_columun1,titl
     sns.barplot( x='x_numeric', y=y_columun1, data=df,ax=ax1,hue=stacked_columun1, palette=palette1)
     sns.lineplot( x='x_numeric', y=y_columun2, data=df, ax=ax2,hue=stacked_columun1, palette=palette2)
     # 凡例の位置とフォントサイズを変更
-    ax1.legend(loc="lower left",fontsize=10)
-    ax2.legend(loc="lower right",fontsize=10)
+    ax1.legend(loc="lower left",fontsize=10, prop=font_prop)
+    ax2.legend(loc="lower right",fontsize=10, prop=font_prop)
     #タイトル、軸ラベルの設定
     plt.title(title,fontsize=15, fontproperties=font_prop)
     ax1.set_xlabel('', fontproperties=font_prop)
     ax1.set_ylabel('売上[USドル]',fontsize=15, fontproperties=font_prop)
     ax2.set_ylabel('利益率[%]',fontsize=15, fontproperties=font_prop)
+    ax1.set_xticklabels(ax1.get_xticklabels(), fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
@@ -105,6 +107,7 @@ def bar_plot(df,x_columun,y_columun,y_rabel,title,rotation):
     ax.set_xlabel('', fontproperties=font_prop)
     ax.set_ylim([0, df[y_columun].max()*1.1])
     ax.set_ylabel(y_rabel,fontsize=10, fontproperties=font_prop)
+    ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
@@ -126,11 +129,12 @@ def stakedbar_plot(df,x_columun,y_columun,stacked_columun,title,rotation):
     # sns.barplot( x='x_numeric', y=y_columun, data=df,ax=ax,hue=stacked_columun,stacked=True, palette='dark:gray')
     # sns.lineplot( x='x_numeric', y=y_columun2, data=df, ax=ax2,hue=stacked_columun1, palette=palette2)
     # 凡例の位置とフォントサイズを変更
-    ax.legend(loc="lower left",fontsize=10)
+    ax.legend(loc="lower left",fontsize=10, prop=font_prop)
     #タイトル、軸ラベルの設定
     plt.title(title,fontsize=15, fontproperties=font_prop)
     ax.set_xlabel('', fontproperties=font_prop)
     ax.set_ylabel('売上[USドル]',fontsize=15, fontproperties=font_prop)
+    ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
@@ -151,6 +155,7 @@ def catplot_strip(df,x_columun,y_columun,y_rabel,title):
     ax.set_xlabel('', fontproperties=font_prop)
     ax.set_ylabel(y_rabel,fontsize=10, fontproperties=font_prop)
     ax.axhline(y=0, color='orange', linestyle='--')
+    ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
     plt.tight_layout()
     return fig
 #折れ線グラフ
@@ -184,6 +189,7 @@ def reg_plot(df,x_columun,y_columun,x_rabel,y_rabel,title):
     plt.title(title,fontsize=15, fontproperties=font_prop)
     ax.set_xlabel(x_rabel,fontsize=10, fontproperties=font_prop)
     ax.set_ylabel(y_rabel,fontsize=10, fontproperties=font_prop)
+    ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
     plt.tight_layout()
     return fig
 
