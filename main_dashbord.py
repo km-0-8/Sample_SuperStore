@@ -7,9 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import seaborn as sns
 import numpy as np
-font_prop = fm.FontProperties(fname='fonts/NotoSansJP-Regular.ttf')
-plt.rcParams['font.family'] = font_prop.get_name()
-sns.set(font='Noto Sans CJK JP')
+plt.rcParams['font.family'] = 'IPAexGothic'
 
 # %%
 def columns_datatype_change(df):
