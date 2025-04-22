@@ -4,7 +4,6 @@ import pandas as pd
 import streamlit as st
 # %matplotlib inline
 import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
 import seaborn as sns
 import numpy as np
 plt.rcParams['font.family'] = 'IPAexGothic'
