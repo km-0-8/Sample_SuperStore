@@ -1,0 +1,26 @@
+English,japanese
+Row ID,行 ID
+Order ID,オーダー ID
+Order Date,オーダー日
+Ship Date,出荷日
+Ship Mode,出荷モード
+Customer ID,顧客 ID
+Customer Name,顧客名
+Segment,顧客区分
+Country,国
+City,市
+State,州
+Postal Code,郵便番号
+Region,地域
+Product ID,製品 ID
+Category,カテゴリ
+Sub-Category,サブカテゴリ
+Product Name,製品名
+Sales,売上
+Quantity,数量
+Discount,割引率
+Profit,利益
+Returned,返品
+Order ID,注文ID
+Person,人
+Region,地域
