@@ -4,9 +4,9 @@ import pandas as pd
 import streamlit as st
 # %matplotlib inline
 import matplotlib.pyplot as plt
-import japanize_matplotlib
 import seaborn as sns
 import numpy as np
+plt.rcParams['font.family'] = 'IPAexGothic'
 
 # %%
 def columns_datatype_change(df):
@@ -21,7 +21,6 @@ def columns_datatype_change(df):
 def bar_line_plot(df,x_columun,y_columun1,y_columun2,title):
     #グラフの描画設定
     fig = plt.figure(figsize=(7, 4), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
     plt.rcParams["font.size"] = 10
     #X軸を非連続にするために文字列に変換
     df['x_numeric'] = df[x_columun].astype(str)
@@ -58,7 +57,6 @@ def bar_line_plot(df,x_columun,y_columun1,y_columun2,title):
 def stakedbar_line_plot(df,x_columun,y_columun1,y_columun2,stacked_columun1,title):
     #グラフの描画設定
     fig = plt.figure(figsize=(7, 4), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
     plt.rcParams["font.size"] = 10
     #X軸を非連続にするために文字列に変換
     df['x_numeric'] = df[x_columun].astype(str)
@@ -91,7 +89,6 @@ def stakedbar_line_plot(df,x_columun,y_columun1,y_columun2,stacked_columun1,titl
 def bar_plot(df,x_columun,y_columun,y_rabel,title,rotation):
     #グラフの描画設定
     fig,ax= plt.subplots(figsize=(8, 3), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"]=10
     plt.rcParams["ytick.labelsize"]=10
@@ -111,7 +108,6 @@ def bar_plot(df,x_columun,y_columun,y_rabel,title,rotation):
 def stakedbar_plot(df,x_columun,y_columun,stacked_columun,title,rotation):
     #グラフの描画設定
     fig,ax= plt.subplots(figsize=(7, 4), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"]=10
     plt.rcParams["ytick.labelsize"]=10
@@ -137,7 +133,6 @@ def stakedbar_plot(df,x_columun,y_columun,stacked_columun,title,rotation):
 def catplot_strip(df,x_columun,y_columun,y_rabel,title):
     #グラフの描画設定
     fig,ax= plt.subplots(figsize=(8, 3), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"]=10
     plt.rcParams["ytick.labelsize"]=10
@@ -156,7 +151,6 @@ def catplot_strip(df,x_columun,y_columun,y_rabel,title):
 def line_plot(df,x_columun,y_columun,y_rabel,title):
     #グラフの描画設定
     fig,ax= plt.subplots(figsize=(8, 2), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"]=10
     plt.rcParams["ytick.labelsize"]=10
@@ -173,7 +167,6 @@ def line_plot(df,x_columun,y_columun,y_rabel,title):
 def reg_plot(df,x_columun,y_columun,x_rabel,y_rabel,title):
     #グラフの描画設定
     fig,ax= plt.subplots(figsize=(4, 2), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"]=10
     plt.rcParams["ytick.labelsize"]=10
