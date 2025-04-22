@@ -169,7 +169,7 @@ def line_plot(df,x_columun,y_columun,y_rabel,title):
     # グラフ描画
     sns.lineplot( x=x_columun, y=y_columun, data=df, ax=ax, color='gray')
     #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
+    plt.title(title,fontsize=15, fontproperties=font_prop)
     ax.set_xlabel('')
     if title=='リピート率推移※2014は初年度のため無し':
         plt.xticks(df['year'])
