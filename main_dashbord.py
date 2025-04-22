@@ -1,18 +1,12 @@
 # %%
 
-import os
 import pandas as pd
 import streamlit as st
-import plotly.express as px
 # %matplotlib inline
 import matplotlib.pyplot as plt
-# import matplotlib_fontja
+import japanize_matplotlib
 import seaborn as sns
 import numpy as np
-
-from decimal import Decimal,ROUND_UP
-from datetime import date
-from datetime import datetime as dt, timedelta,date
 
 # %%
 def columns_datatype_change(df):
