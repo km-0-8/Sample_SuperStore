@@ -1,20 +1,14 @@
 # %%
-
 import os
 import pandas as pd
 import streamlit as st
-import plotly.express as px
 # %matplotlib inline
 import matplotlib.pyplot as plt
-# import matplotlib_fontja
+import matplotlib.font_manager as fm
 import seaborn as sns
 import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-
-from decimal import Decimal,ROUND_UP
-from datetime import date
-from datetime import datetime as dt, timedelta,date
 
 # %%
 
@@ -29,11 +23,6 @@ def columns_datatype_change(df):
 
     return df
 
-<<<<<<< Updated upstream
-#棒グラフ×折れ線グラフ
-def bar_line_plot(df,x_columun,y_columun1,y_columun2,title):
-    #グラフの描画設定
-=======
 
 font_prop = fm.FontProperties(fname='fonts/ipaexg.ttf')
 # 棒グラフ×折れ線グラフ
@@ -41,9 +30,8 @@ font_prop = fm.FontProperties(fname='fonts/ipaexg.ttf')
 
 def bar_line_plot(df, x_columun, y_columun1, y_columun2, title):
     # グラフの描画設定
->>>>>>> Stashed changes
     fig = plt.figure(figsize=(7, 4), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
+    plt.rcParams['font.family'] = font_prop.get_name()
     plt.rcParams["font.size"] = 10
     # X軸を非連続にするために文字列に変換
     df['x_numeric'] = df[x_columun].astype(str)
@@ -67,16 +55,6 @@ def bar_line_plot(df, x_columun, y_columun1, y_columun2, title):
     handler1, label1 = ax1.get_legend_handles_labels()
     handler2, label2 = ax2.get_legend_handles_labels()
     # ax1で凡例をまとめて表示
-<<<<<<< Updated upstream
-    ax1.legend(handler1 + handler2, label1 + label2, loc="lower left",fontsize=10)
-    # ax2の凡例は削除
-    ax2.get_legend().remove()
-    #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax1.set_xlabel('')
-    ax1.set_ylabel('売上[USドル]',fontsize=15)
-    ax2.set_ylabel('利益率[%]',fontsize=15)
-=======
     ax1.legend(handler1 + handler2, label1 + label2,
                loc="lower left", fontsize=10, prop=font_prop)
     # ax2の凡例は削除
@@ -87,7 +65,6 @@ def bar_line_plot(df, x_columun, y_columun1, y_columun2, title):
     ax1.set_ylabel('売上[USドル]', fontsize=15, fontproperties=font_prop)
     ax2.set_ylabel('利益率[%]', fontsize=15, fontproperties=font_prop)
     ax1.set_xticklabels(ax1.get_xticklabels(), fontproperties=font_prop)
->>>>>>> Stashed changes
     plt.tight_layout()
     return fig
 
@@ -97,7 +74,7 @@ def bar_line_plot(df, x_columun, y_columun1, y_columun2, title):
 def stakedbar_line_plot(df, x_columun, y_columun1, y_columun2, stacked_columun1, title):
     # グラフの描画設定
     fig = plt.figure(figsize=(7, 4), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
+    plt.rcParams['font.family'] = font_prop.get_name()
     plt.rcParams["font.size"] = 10
     # X軸を非連続にするために文字列に変換
     df['x_numeric'] = df[x_columun].astype(str)
@@ -118,23 +95,6 @@ def stakedbar_line_plot(df, x_columun, y_columun1, y_columun2, stacked_columun1,
     sns.lineplot(x='x_numeric', y=y_columun2, data=df, ax=ax2,
                  hue=stacked_columun1, palette=palette2)
     # 凡例の位置とフォントサイズを変更
-<<<<<<< Updated upstream
-    ax1.legend(loc="lower left",fontsize=10)
-    ax2.legend(loc="lower right",fontsize=10)
-    #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax1.set_xlabel('')
-    ax1.set_ylabel('売上[USドル]',fontsize=15)
-    ax2.set_ylabel('利益率[%]',fontsize=15)
-    plt.tight_layout()
-    return fig
-
-#棒グラフ
-def bar_plot(df,x_columun,y_columun,y_rabel,title,rotation):
-    #グラフの描画設定
-    fig,ax= plt.subplots(figsize=(8, 3), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
-=======
     ax1.legend(loc="lower left", fontsize=10, prop=font_prop)
     ax2.legend(loc="lower right", fontsize=10, prop=font_prop)
     # タイトル、軸ラベルの設定
@@ -153,7 +113,6 @@ def bar_plot(df, x_columun, y_columun, y_rabel, title, rotation):
     # グラフの描画設定
     fig, ax = plt.subplots(figsize=(8, 3), facecolor="w")
     plt.rcParams['font.family'] = font_prop.get_name()
->>>>>>> Stashed changes
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"] = 10
     plt.rcParams["ytick.labelsize"] = 10
@@ -161,21 +120,6 @@ def bar_plot(df, x_columun, y_columun, y_rabel, title, rotation):
     df['x_numeric'] = df[x_columun].astype(str)
     sns.barplot(x='x_numeric', y=y_columun, data=df, ax=ax, color='gray')
     plt.xticks(rotation=rotation)
-<<<<<<< Updated upstream
-    #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax.set_xlabel('')
-    ax.set_ylim([0, df[y_columun].max()*1.1])
-    ax.set_ylabel(y_rabel,fontsize=10)
-    plt.tight_layout()
-    return fig
-
-#複数棒グラフ
-def stakedbar_plot(df,x_columun,y_columun,stacked_columun,title,rotation):
-    #グラフの描画設定
-    fig,ax= plt.subplots(figsize=(7, 4), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
-=======
     # タイトル、軸ラベルの設定
     plt.title(title, fontsize=15, fontproperties=font_prop)
     ax.set_xlabel('', fontproperties=font_prop)
@@ -192,7 +136,6 @@ def stakedbar_plot(df, x_columun, y_columun, stacked_columun, title, rotation):
     # グラフの描画設定
     fig, ax = plt.subplots(figsize=(7, 4), facecolor="w")
     plt.rcParams['font.family'] = font_prop.get_name()
->>>>>>> Stashed changes
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"] = 10
     plt.rcParams["ytick.labelsize"] = 10
@@ -207,21 +150,6 @@ def stakedbar_plot(df, x_columun, y_columun, stacked_columun, title, rotation):
     # sns.barplot( x='x_numeric', y=y_columun, data=df,ax=ax,hue=stacked_columun,stacked=True, palette='dark:gray')
     # sns.lineplot( x='x_numeric', y=y_columun2, data=df, ax=ax2,hue=stacked_columun1, palette=palette2)
     # 凡例の位置とフォントサイズを変更
-<<<<<<< Updated upstream
-    ax.legend(loc="lower left",fontsize=10)
-    #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax.set_xlabel('')
-    ax.set_ylabel('売上[USドル]',fontsize=15)
-    plt.tight_layout()
-    return fig
-
-#散布図
-def catplot_strip(df,x_columun,y_columun,y_rabel,title):
-    #グラフの描画設定
-    fig,ax= plt.subplots(figsize=(8, 3), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
-=======
     ax.legend(loc="lower left", fontsize=10, prop=font_prop)
     # タイトル、軸ラベルの設定
     plt.title(title, fontsize=15, fontproperties=font_prop)
@@ -238,7 +166,6 @@ def catplot_strip(df, x_columun, y_columun, y_rabel, title):
     # グラフの描画設定
     fig, ax = plt.subplots(figsize=(8, 3), facecolor="w")
     plt.rcParams['font.family'] = font_prop.get_name()
->>>>>>> Stashed changes
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"] = 10
     plt.rcParams["ytick.labelsize"] = 10
@@ -246,27 +173,14 @@ def catplot_strip(df, x_columun, y_columun, y_rabel, title):
     df['x_numeric'] = df[x_columun].astype(str)
     sns.stripplot(x='x_numeric', y=y_columun, data=df, ax=ax, color='gray')
     plt.xticks(rotation=90)
-<<<<<<< Updated upstream
-    #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax.set_xlabel('')
-    ax.set_ylabel(y_rabel,fontsize=10)
-=======
     # タイトル、軸ラベルの設定
     plt.title(title, fontsize=15, fontproperties=font_prop)
     ax.set_xlabel('', fontproperties=font_prop)
     ax.set_ylabel(y_rabel, fontsize=10, fontproperties=font_prop)
->>>>>>> Stashed changes
     ax.axhline(y=0, color='orange', linestyle='--')
+    ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
     plt.tight_layout()
     return fig
-<<<<<<< Updated upstream
-#折れ線グラフ
-def line_plot(df,x_columun,y_columun,y_rabel,title):
-    #グラフの描画設定
-    fig,ax= plt.subplots(figsize=(8, 2), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
-=======
 # 折れ線グラフ
 
 
@@ -274,32 +188,16 @@ def line_plot(df, x_columun, y_columun, y_rabel, title):
     # グラフの描画設定
     fig, ax = plt.subplots(figsize=(8, 2), facecolor="w")
     plt.rcParams['font.family'] = font_prop.get_name()
->>>>>>> Stashed changes
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"] = 10
     plt.rcParams["ytick.labelsize"] = 10
     # グラフ描画
-<<<<<<< Updated upstream
-    sns.lineplot( x=x_columun, y=y_columun, data=df, ax=ax, color='gray')
-    #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-=======
     sns.lineplot(x=x_columun, y=y_columun, data=df, ax=ax, color='gray')
     # タイトル、軸ラベルの設定
     plt.title(title, fontsize=15, fontproperties=font_prop)
->>>>>>> Stashed changes
     ax.set_xlabel('')
     if title == 'リピート率推移※2014は初年度のため無し':
         plt.xticks(df['year'])
-<<<<<<< Updated upstream
-    ax.set_ylabel(y_rabel,fontsize=10)
-    plt.tight_layout()
-    return fig
-def reg_plot(df,x_columun,y_columun,x_rabel,y_rabel,title):
-    #グラフの描画設定
-    fig,ax= plt.subplots(figsize=(4, 2), facecolor="w")
-    plt.rcParams['font.family'] = 'Meiryo'
-=======
     ax.set_ylabel(y_rabel, fontsize=10, fontproperties=font_prop)
     plt.tight_layout()
     return fig
@@ -309,25 +207,16 @@ def reg_plot(df, x_columun, y_columun, x_rabel, y_rabel, title):
     # グラフの描画設定
     fig, ax = plt.subplots(figsize=(4, 2), facecolor="w")
     plt.rcParams['font.family'] = font_prop.get_name()
->>>>>>> Stashed changes
     plt.rcParams["font.size"] = 10
     plt.rcParams["xtick.labelsize"] = 10
     plt.rcParams["ytick.labelsize"] = 10
     # グラフ描画
-<<<<<<< Updated upstream
-    sns.regplot( x=x_columun, y=y_columun, data=df, ax=ax, color='gray')
-    #タイトル、軸ラベルの設定
-    plt.title(title,fontsize=15)
-    ax.set_xlabel(x_rabel,fontsize=10)
-    ax.set_ylabel(y_rabel,fontsize=10)
-=======
     sns.regplot(x=x_columun, y=y_columun, data=df, ax=ax, color='gray')
     # タイトル、軸ラベルの設定
     plt.title(title, fontsize=15, fontproperties=font_prop)
     ax.set_xlabel(x_rabel, fontsize=10, fontproperties=font_prop)
     ax.set_ylabel(y_rabel, fontsize=10, fontproperties=font_prop)
     ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
->>>>>>> Stashed changes
     plt.tight_layout()
     return fig
 # plotly版
@@ -368,7 +257,7 @@ def bar_line_plot_plotly(df, x_columun, y_columun1, y_columun2, title):
         margin=dict(l=40, r=40, t=40, b=40),
         template='simple_white',
         font=dict(family='IPAexGothic', size=12),
-        height=600
+        height=300
     )
     return fig
 
@@ -407,7 +296,8 @@ def stakedbar_line_plot_plotly(df, x_columun, y_columun1, y_columun2, stacked_co
                    range=[0, df[y_columun1].max()*1.1]),
         yaxis2=dict(title='利益率[%]', overlaying='y', side='right', range=[
                     0, df[y_columun2].max()*1.1]),
-        legend=dict(x=0, y=0, xanchor='left', yanchor='bottom'),
+        legend=dict(x=0, y=0, xanchor='left',
+                    yanchor='bottom', font=dict(size=8)),
         margin=dict(l=40, r=40, t=40, b=40),
         template='simple_white',
         font=dict(family='IPAexGothic', size=12),
@@ -429,7 +319,7 @@ def bar_plot_plotly(df, x_columun, y_columun, y_rabel, title, rotation):
 
     fig.update_layout(
         title=title,
-        xaxis=dict(title='', tickangle=rotation),
+        xaxis=dict(title='', tickangle=rotation, tickfont=dict(size=8)),
         yaxis=dict(title=y_rabel, range=[0, df[y_columun].max()*1.1]),
         template='simple_white',
         font=dict(family='IPAexGothic', size=12),
@@ -481,7 +371,7 @@ def catplot_strip_plotly(df, x_columun, y_columun, y_rabel, title):
 
     fig.update_layout(
         title=title,
-        xaxis=dict(title='', tickangle=90),
+        xaxis=dict(title='', tickangle=90, tickfont=dict(size=8)),
         yaxis=dict(title=y_rabel),
         template='simple_white',
         font=dict(family='IPAexGothic', size=12),
@@ -502,7 +392,7 @@ def line_plot_plotly(df, x_columun, y_columun, y_rabel, title):
 
     fig.update_layout(
         title=title,
-        xaxis=dict(title=''),
+        xaxis=dict(title='', tickformat="%m/%d", dtick="D5", tickangle=90),
         yaxis=dict(title=y_rabel),
         template='simple_white',
         font=dict(family='IPAexGothic', size=12),
@@ -546,10 +436,7 @@ def reg_plot_plotly(df, x_columun, y_columun, x_rabel, y_rabel, title):
     )
     return fig
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 # %%
 # 元データ読み込み
 orders_df = pd.read_csv('data_csv/Orders.csv')
@@ -579,7 +466,7 @@ merge_df['month'] = merge_df['Order Date'].dt.month
 merge_df = merge_df.replace(
     {'Region': {'South': '南', 'Central': '中央', 'East': '東', 'West': '西'}})
 merge_df = merge_df.replace({'State': {"California": "カリフォルニア", "Florida": "フロリダ", "North Carolina": "ノースカロライナ", "Washington": "ワシントン", "Texas": "テキサス", "Wisconsin": "ウィスコンシン", "Utah": "ユタ", "Nebraska": "ネブラスカ", "Pennsylvania": "ペンシルベニア", "Illinois": "イリノイ", "Minnesota": "ミネソタ", "Michigan": "ミシガン", "Delaware": "デラウェア", "Indiana": "インディアナ", "New York": "ニューヨーク", "Arizona": "アリゾナ", "Virginia": "バージニア", "Tennessee": "テネシー", "Alabama": "アラバマ", "South Carolina": "サウスカロライナ", "Oregon": "オレゴン", "Colorado": "コロラド", "Iowa": "アイオワ", "Ohio": "オハイオ", "Missouri": "ミズーリ",
-                            "Oklahoma": "オクラホマ", "New Mexico": "ニューメキシコ", "Louisiana": "ルイジアナ", "Connecticut": "コネチカット", "New Jersey": "ニュージャージー", "Massachusetts": "マサチューセッツ", "Georgia": "ジョージア", "Nevada": "ネバダ", "Rhode Island": "ロードアイランド", "Mississippi": "ミシシッピ", "Arkansas": "アーカンソー", "Montana": "モンタナ", "New Hampshire": "ニューハンプシャー", "Maryland": "メリーランド", "District of Columbia": "ワシントンD.C.（コロンビア特別区）", "Kansas": "カンザス", "Vermont": "バーモント", "Maine": "メイン", "South Dakota": "サウスダコタ", "Idaho": "アイダホ", "North Dakota": "ノースダコタ", "Wyoming": "ワイオミング", "West Virginia": "ウェストバージニア", "Kentucky": "ケンタッキー"}})
+                            "Oklahoma": "オクラホマ", "New Mexico": "ニューメキシコ", "Louisiana": "ルイジアナ", "Connecticut": "コネチカット", "New Jersey": "ニュージャージー", "Massachusetts": "マサチューセッツ", "Georgia": "ジョージア", "Nevada": "ネバダ", "Rhode Island": "ロードアイランド", "Mississippi": "ミシシッピ", "Arkansas": "アーカンソー", "Montana": "モンタナ", "New Hampshire": "ニューハンプシャー", "Maryland": "メリーランド", "District of Columbia": "ワシントンD.C.", "Kansas": "カンザス", "Vermont": "バーモント", "Maine": "メイン", "South Dakota": "サウスダコタ", "Idaho": "アイダホ", "North Dakota": "ノースダコタ", "Wyoming": "ワイオミング", "West Virginia": "ウェストバージニア", "Kentucky": "ケンタッキー"}})
 merge_df = merge_df.replace(
     {'Category': {"Furniture": "家具", "Office Supplies": "事務用品", "Technology": "電子機器"}})
 merge_df = merge_df.replace({'Sub-Category': {'Bookcases': '本棚', 'Chairs': '椅子', 'Labels': 'ラベル', 'Tables': 'テーブル', 'Storage': '収納', 'Furnishings': 'インテリア', 'Art': 'アート', 'Phones': '電話',
@@ -768,11 +655,13 @@ fig15 = stakedbar_line_plot_plotly(merge_df.groupby(['year', 'Region'], as_index
                                    .pipe(lambda df: df[df['year'].isin(df['year'].drop_duplicates().nlargest(2))]), 'year', 'Sales', 'profit_ratio', 'Region', '【売上・利益率】地域別/前年比比較')
 # 【売上】州別/年間
 fig16 = bar_plot_plotly(merge_df.groupby(['year', 'State'], as_index=False)[['Sales']].sum()
-                        .pipe(lambda df: df[df['year'] == df['year'].max()]), 'State', 'Sales', '売上[USドル]', '年間州別売上', 90)
+                        .pipe(lambda df: df[df['year'] == df['year'].max()])
+                        .sort_values('Sales', ascending=False), 'State', 'Sales', '売上[USドル]', '年間州別売上', 90)
 # 【利益率】州別/年間
 fig17 = catplot_strip_plotly(merge_df.groupby(['year', 'State'], as_index=False)[['Sales', 'Profit']].sum()
                              .assign(profit_ratio=lambda df: (df['Profit'] / df['Sales']) * 100)
-                             .pipe(lambda df: df[df['year'] == df['year'].max()]), 'State', 'profit_ratio', '利益率[%]', '年間州別利益率')
+                             .pipe(lambda df: df[df['year'] == df['year'].max()])
+                             .sort_values('profit_ratio', ascending=False), 'State', 'profit_ratio', '利益率[%]', '年間州別利益率')
 # 【売上】月別/年間
 fig18 = bar_plot_plotly(merge_df.groupby(['year', 'month'], as_index=False)[['Sales', 'Profit']].sum()
                         .assign(profit_ratio=lambda df: (df['Profit'] / df['Sales']) * 100)
@@ -781,18 +670,26 @@ fig18 = bar_plot_plotly(merge_df.groupby(['year', 'month'], as_index=False)[['Sa
 fig19 = line_plot_plotly(merge_df.groupby(['Order Date', 'year', 'month'], as_index=False)[['Sales', 'Profit']].sum()
                          .assign(profit_ratio=lambda df: (df['Profit'] / df['Sales']) * 100)
                          .pipe(lambda df: df[(df['year'] == df['year'].max()) & (df['month'] == df[df['year'] == df['year'].max()]['month'].max())]), 'Order Date', 'Sales', '売上[USドル]', '売上・利益率月間推移')
-
-
-fig20 = stakedbar_line_plot_plotly(
-    year_17_category_df, 'year', 'Sales', 'profit_ratio', 'Category', '2016-17カテゴリ別売上/利益率')
-fig21 = bar_plot_plotly(year_17_subcategory_df, 'Sub-Category',
-                        'Sales', '売上[USドル]', '2017家具/サブカテゴリ別売上', 0)
-fig22 = catplot_strip_plotly(
-    year_17_subcategory_df, 'Sub-Category', 'profit_ratio', '利益率[%]', '2017家具/サブカテゴリ別利益率')
-fig23 = reg_plot_plotly(merge_df, 'Discount',
-                        'profit_ratio', '割引率[%]', '利益率[%]', '割引率と利益率の関係')
+# 【売上・利益率】カテゴリ別/年間
+fig20 = stakedbar_line_plot_plotly(merge_df.groupby(['year', 'Category'], as_index=False)[['Sales', 'Profit']].sum()
+                                   .assign(profit_ratio=lambda df: (df['Profit'] / df['Sales']) * 100)
+                                   .pipe(lambda df: df[df['year'].isin(df['year'].drop_duplicates().nlargest(2))]), 'year', 'Sales', 'profit_ratio', 'Category', '【売上・利益率】カテゴリ別/年間')
+# 【売上】サブカテゴリ別/年間
+fig21 = bar_plot_plotly(merge_df.groupby(['year', 'Sub-Category'], as_index=False)[['Sales']].sum()
+                        .pipe(lambda df: df[df['year'] == df['year'].max()])
+                        .sort_values('Sales', ascending=False), 'Sub-Category', 'Sales', '売上[USドル]', '【売上】サブカテゴリ別/年間', 90)
+# 【利益率】サブカテゴリ別/年間
+fig22 = catplot_strip_plotly(merge_df.groupby(['year', 'Sub-Category'], as_index=False)[['Sales', 'Profit']].sum()
+                             .assign(profit_ratio=lambda df: (df['Profit'] / df['Sales']) * 100)
+                             .pipe(lambda df: df[df['year'] == df['year'].max()])
+                             .sort_values('profit_ratio', ascending=False), 'Sub-Category', 'profit_ratio', '利益率[%]', '【利益率】サブカテゴリ別/年間')
+# 【割引実施割合】サブカテゴリ別/年間
 fig24 = bar_plot_plotly(year_17_subcategory_df, 'Sub-Category',
                         'Discount_ratio', '割引が実施される割合[%]', '2017サブカテゴリ別割引実施割合', 0)
+
+
+# fig23 = reg_plot_plotly(merge_df,'Discount','profit_ratio','割引率[%]','利益率[%]','割引率と利益率の関係')
+
 fig25 = stakedbar_plot_plotly(merge_df[['year', 'customers_new_old', 'Customer ID', 'Sales']].groupby(['year', 'customers_new_old'])[
                               'Sales'].agg(['count', 'sum']).reset_index(), 'year', 'count', 'customers_new_old', '新規/既存顧客数の推移', 0)
 fig26 = line_plot_plotly(repeat_df, 'year', 'repeat_rate',
@@ -993,34 +890,41 @@ elif section == "➃ 今後に向けて":
     st.header(':blue[➃ 今後に向けて]')
     st.markdown("#### :gray[施策実行 → 効果検証 → フィードバック → PDCAサイクルを回し最適化を図る]")
 elif section == "★KPI確認用ダッシュボード":
-
     col1, col2 = st.columns(2)
     with col1:
         st.write(fig14)  # 年別売上利益率
-        st.divider()
-        st.write(fig15)  # 地域別売上/利益率
-        # subcol1, subcol2 = st.columns(2)
-        # with subcol1:
-        #
-        # with subcol2:
-        #
     with col2:
         st.write(fig18)  # 月別売上/利益率
-        st.write(fig19)  # 日別売上/利益率
-        st.divider()
+    st.write(fig19)  # 日別売上/利益率
+    st.divider()
+
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        st.write(fig15)  # 地域別売上/利益率
+    with col2:
         st.write(fig16)  # 州別売上
         st.write(fig17)  # 州別利益率
-        # subcol1, subcol2 = st.columns(2)
-        # with subcol1:
-
-        # with subcol2:
-
-    # with col3:
-
-    #     st.write(fig21)#サブカテゴリ別売上
-    #     st.write(fig25)#新規/既存顧客数の推移
-    #     st.write(fig22)#サブカテゴリ別利益率
+    st.divider()
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.write(fig20)  # カテゴリ別売上/利益率
+    with col2:
+        st.write(fig21)  # サブカテゴリ別売上
+        st.write(fig22)  # サブカテゴリ別利益率
+        st.write(fig24)  # サブカテゴリ別割引実施割合
+    st.divider()
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.write(fig25)  # 新規/既存顧客数の推移
+    with col2:
+        st.write(fig26)  # リピート率推移
+    st.divider()
+    # subcol1, subcol2 = st.columns(2)
+    # with subcol1:
+    #
+    # with subcol2:
+    #
     #     st.write(fig26)#リピート率
-    #         st.write(fig20)#カテゴリ別売上/利益率
+
     #         st.write(fig24)#カテゴリ別割引実施割合
     st.divider()
