@@ -436,7 +436,7 @@ def reg_plot_plotly(df, x_columun, y_columun, x_rabel, y_rabel, title):
 
 
 # %% [markdown]
-# 
+#
 
 # %%
 # 元データ読み込み
@@ -483,77 +483,6 @@ merge_df['new_customers_flg'] = (
     merge_df['Order Date'] == first_order_date).astype(int)
 merge_df['customers_new_old'] = merge_df['new_customers_flg'].apply(
     lambda x: '新規' if x == 1 else '既存')
-# #------------------------------------------------------------------------------------------------------------------
-# #【全期間対象】
-
-# #------------------------------------------------------------------------------------------------------------------
-# #【日別集計】
-# date_df=merge_df[['Order Date','year','month','Sales','Quantity','Discount','Profit']]
-# date_df=date_df.groupby(['year','month','Order Date'],as_index=False).sum()#期間で集計
-# date_df['profit_ratio']=(date_df['Profit']/date_df['Sales'])*100#利益率計算
-# #【日別集計】2017年度2月
-# date_17_2_df=date_df[['Order Date','year','month','Sales','Quantity','Discount','Profit','profit_ratio']]
-# date_17_2_df=date_17_2_df[(date_17_2_df['year']==2017)&(date_17_2_df['month']==2)]
-
-# #【月別集計】
-# month_df=merge_df[['year','month','Sales','Quantity','Discount','Profit']]#数値列のみに限定
-# month_df=month_df.groupby(['year','month'],as_index=False).sum()#期間で集計
-# month_df['profit_ratio']=(month_df['Profit']/month_df['Sales'])*100#利益率計算
-# #【月別集計】2017年度
-# month_17_df=month_df[['year','month','Sales','Quantity','Discount','Profit']]
-# month_17_df=month_17_df[(month_17_df['year']==2017)]
-
-# #【年別集計】
-# year_df=merge_df[['year','Sales','Quantity','Discount','Profit']]#数値列のみに限定
-# year_df=year_df.groupby(['year'],as_index=False).sum()#期間で集計
-# year_df['profit_ratio']=(year_df['Profit']/year_df['Sales'])*100#利益率計算
-# #【年別集計】2016-17年度
-# year_16_17_df=year_df[['year','Sales','Quantity','Discount','Profit','profit_ratio']]
-# year_16_17_df=year_16_17_df[(year_16_17_df['year']==2016)|(year_16_17_df['year']==2017)]
-# #【年別集計】2017年度
-# year_17_df=year_df[['year','Sales','Quantity','Discount','Profit','profit_ratio']]
-# year_17_df=year_17_df[(year_17_df['year']==2017)]
-# #------------------------------------------------------------------------------------------------------------------
-# #【地域・年別集計】
-# year_region_df=merge_df[['year','Region','Sales','Quantity','Discount','Profit']]
-# year_region_df=year_region_df.groupby(['year','Region'],as_index=False).sum()
-# year_region_df['profit_ratio']=(year_region_df['Profit']/year_region_df['Sales'])*100
-# #【地域・年別集計】2016-17年度
-# year_16_17_region_df=year_region_df[['year','Region','Sales','Quantity','Discount','Profit','profit_ratio']]
-# year_16_17_region_df=year_16_17_region_df[(year_16_17_region_df['year']==2016)|(year_16_17_region_df['year']==2017)]
-
-# #【州・年別集計】
-# year_state_df=merge_df[['year','Region','State','Sales','Quantity','Discount','Profit']]
-# year_state_df=year_state_df.groupby(['year','Region','State'],as_index=False).sum()
-# year_state_df['profit_ratio']=(year_state_df['Profit']/year_state_df['Sales'])*100
-# #【州・年別集計】南・中央地区、2017年度
-# year_17_south_central_state_df=year_state_df[['year','Region','State','Sales','Quantity','Discount','Profit','profit_ratio']]
-# year_17_south_central_state_df=year_17_south_central_state_df[((year_17_south_central_state_df['Region']=='南')
-#                                                                      |(year_17_south_central_state_df['Region']=='中央'))
-#                                                                      &(year_17_south_central_state_df['year']==2017)]
-# year_17_south_central_state_df=year_17_south_central_state_df.sort_values('profit_ratio',ascending=False)
-# #【州・年別集計】南地区、2017年度
-# year_17_south_state_df=year_state_df[['year','Region','State','Sales','Quantity','Discount','Profit','profit_ratio']]
-# year_17_south_state_df=year_17_south_state_df[(year_17_south_state_df['Region']=='南')&(year_17_south_state_df['year']==2017)]
-# year_17_south_state_df=year_17_south_state_df.sort_values('Sales',ascending=False)
-# #------------------------------------------------------------------------------------------------------------------
-# #【カテゴリ・年別集計】
-# year_category_df=merge_df[['year','Category','Sales','Quantity','Discount','Profit']]
-# year_category_df=year_category_df.groupby(['year','Category'],as_index=False).sum()
-# year_category_df['profit_ratio']=(year_category_df['Profit']/year_category_df['Sales'])*100
-# #【カテゴリ・年別集計】2016-17年度
-# year_17_category_df=year_category_df[['year','Category','Sales','Quantity','Discount','Profit','profit_ratio']]
-# year_17_category_df=year_17_category_df[(year_17_category_df['year']==2016)|(year_17_category_df['year']==2017)]
-
-# #【サブカテゴリ・年別集計】
-# year_subcategory_df=merge_df[['year','Category','Sub-Category','Sales','Quantity','Discount','Profit','Discount_flg','Sub-_Category_flg']]
-# year_subcategory_df=year_subcategory_df.groupby(['year','Category','Sub-Category'],as_index=False).sum()
-# year_subcategory_df['profit_ratio']=(year_subcategory_df['Profit']/year_subcategory_df['Sales'])*100
-# year_subcategory_df['Discount_ratio']=(year_subcategory_df['Discount_flg']/year_subcategory_df['Sub-_Category_flg'])*100
-# # 【サブカテゴリ・年別集計】2017年度
-# year_17_subcategory_df=year_subcategory_df[['year','Category','Sub-Category','Sales','Quantity','Discount','Profit','profit_ratio','Discount_ratio']]
-# year_17_subcategory_df=year_17_subcategory_df[(year_17_subcategory_df['Category']=='家具')&(year_17_subcategory_df['year']==2017)]
-# year_17_subcategory_df=year_17_subcategory_df.sort_values('Sales',ascending=False)
 
 # %%
 # seabornグラフ描画-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -561,10 +490,6 @@ merge_df['customers_new_old'] = merge_df['new_customers_flg'].apply(
 fig1 = bar_line_plot(merge_df.groupby('year', as_index=False)[['Sales', 'Profit']].sum()
                              .assign(profit_ratio=lambda df: (df['Profit'] / df['Sales']) * 100)
                              .pipe(lambda df: df[(df['year'] == 2016) | (df['year'] == 2017)]), 'year', 'Sales', 'profit_ratio', '2016-17売上/利益率')
-# fig14 = bar_line_plot_plotly(merge_df.groupby('year', as_index=False)[['Sales','Profit']].sum()
-#                              .assign(profit_ratio=lambda df: (df['Profit'] / df['Sales']) * 100)
-#                              .pipe(lambda df: df[df['year'].isin(df['year'].nlargest(2))]),
-#                                'year','Sales','profit_ratio','【売上・利益率】前年比比較')
 # #2016-17地域別売上/利益率
 fig2 = stakedbar_line_plot(merge_df.groupby(['year', 'Region'], as_index=False)[['Sales', 'Profit']].sum()
                                    .assign(profit_ratio=lambda df: (df['Profit'] / df['Sales']) * 100)
@@ -697,7 +622,6 @@ fig26 = line_plot_plotly(
 
 # %%
 st.set_page_config(page_title="main_dashboard", layout="wide")
-st.write("使用フォント名:", font_prop.get_name())
 
 # CSSによる全体書式
 st.markdown("""
