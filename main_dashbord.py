@@ -129,6 +129,7 @@ def bar_plot(df, x_columun, y_columun, y_rabel, title, rotation):
     plt.tight_layout()
     return fig
 
+
 # 複数棒グラフ
 
 
@@ -154,6 +155,7 @@ def stakedbar_plot(df, x_columun, y_columun, y_rabel, stacked_columun, title, ro
     ax.set_xticklabels(ax.get_xticklabels(), fontproperties=font_prop)
     plt.tight_layout()
     return fig
+
 
 # 散布図
 
@@ -433,6 +435,9 @@ def reg_plot_plotly(df, x_columun, y_columun, x_rabel, y_rabel, title):
     return fig
 
 
+# %% [markdown]
+# 
+
 # %%
 # 元データ読み込み
 orders_df = pd.read_csv('data_csv/Orders.csv')
@@ -692,6 +697,7 @@ fig26 = line_plot_plotly(
 
 # %%
 st.set_page_config(page_title="main_dashboard", layout="wide")
+st.write("使用フォント名:", font_prop.get_name())
 
 # CSSによる全体書式
 st.markdown("""
