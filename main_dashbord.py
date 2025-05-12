@@ -717,37 +717,85 @@ st.markdown("""
 
 # ページ構成選択
 section = st.sidebar.radio("表示するセクションを選択", [
-    "表紙・アジェンダ",
+    "概要",
+    "サマリー",
+    "アジェンダ",
     "➀ 財務状況",
     "➁ 売上・利益率分析",
     "➂ 改善施策の提案",
-    "➃ 今後に向けて",
-    '★KPI確認用ダッシュボード'
+    "➃ 今後に向けて"
 ])
+if section == "概要":
+    st.title('概要')
+    st.subheader("説明対象者")
+    st.text("マーケティング担当者様")
+    st.subheader("取扱いデータ")
+    st.text("アメリカ小売店販売のサンプルデータ")
+    st.subheader("テーブル一覧")
+    st.text("・発注ログ")
+    st.text("・返品ログ")
 
-# WEBページ作成----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# 表紙・アジェンダ
-if section == "表紙・アジェンダ":
-    st.write("## マーケティング担当者様向け")
-    st.markdown("### <u>売上・利益構造の可視化と改善提案</u>", unsafe_allow_html=True)
-    st.markdown("#### ～サンプルスーパーストア データ分析レポート～", unsafe_allow_html=True)
-    st.write("")
+elif section == "サマリー":
+    graph_col, text_col = st.columns(2)
+    with graph_col:
+        st.write(mry_sls_pr_fig)  # 年別売上利益率
+    with text_col:
+        st.write(mry_mo_sls_fig)  # 月別売上/利益率
+    st.write(mrm_dly_sls_fig)  # 日別売上/利益率
     st.divider()
 
-    st.header(':blue[アジェンダ]')
-    st.markdown("""
-    #### ➀ 財務状況  
-    <span style='color:gray;'>・2016-17年度業績報告</span><br>
-    #### ➁ 売上・利益率分析レポート  
-    <span style='color:gray;'>・地域/州別<br>
-    ・月別売上<br>
-    ・カテゴリ/サブカテゴリ別 売上・利益率<br>
-    ・割引と利益率の関連性<br>
-    ・新規/既存顧客数推移と客単価<br>
-    ・顧客のリピート率</span><br>
-    #### ➂ 改善施策の提案  
-    #### ➃ 今後に向けて  
-    """, unsafe_allow_html=True)
+    graph_col, text_col = st.columns([1, 2])
+    with graph_col:
+        st.write(mry_Reg_sls_pr_fig)  # 地域別売上/利益率
+    with text_col:
+        st.write(mry_st_sls_fig)  # 州別売上
+        st.write(mry_st_pr_fig)  # 州別利益率
+    st.divider()
+    graph_col, text_col = st.columns([1, 1])
+    with graph_col:
+        st.write(mry_cat_sls_pr_fig)  # カテゴリ別売上/利益率
+    with text_col:
+        st.write(mry_subcat_sls_fig)  # サブカテゴリ別売上
+        st.write(mry_subcat_pr_fig)  # サブカテゴリ別利益率
+        st.write(mry_subcat_dr_fig)  # サブカテゴリ別割引実施割合
+    st.divider()
+    graph_col, text_col = st.columns([1, 1])
+    with graph_col:
+        st.write(mry_cust_fig)  # 新規/既存顧客数の推移
+    with text_col:
+        st.write(mry_rpt_fig)  # リピート率推移
+
+elif section == "アジェンダ":
+    # st.write("## マーケティング担当者様向け")
+    # st.markdown("### <u>売上・利益構造の可視化と改善提案</u>", unsafe_allow_html=True)
+    # st.markdown("#### ～サンプルスーパーストア データ分析レポート～", unsafe_allow_html=True)
+    # st.write("")
+    # st.divider()
+    st.title('アジェンダ')
+    st.subheader("➀ 財務状況")
+    st.subheader("➁ 売上・利益率分析レポート")
+    st.text("・月別売上")
+    st.text("・カテゴリ/サブカテゴリ別 売上・利益率")
+    st.text("・割引と利益率の関連性")
+    st.text("・新規/既存顧客数推移と客単価")   
+    st.text("・顧客のリピート率")
+    st.subheader("➂ 改善施策の提案")
+    st.subheader("➃ 今後に向けて")
+    # st.markdown("""
+    # #### ➀ 財務状況  
+    # <span style='color:gray;'>・2016-17年度業績報告</span><br>
+    # #### ➁ 売上・利益率分析レポート  
+    # <span style='color:gray;'>・地域/州別<br>
+    # ・月別売上<br>
+    # ・カテゴリ/サブカテゴリ別 売上・利益率<br>
+    # ・割引と利益率の関連性<br>
+    # ・新規/既存顧客数推移と客単価<br>
+    # ・顧客のリピート率</span><br>
+    # #### ➂ 改善施策の提案  
+    # #### ➃ 今後に向けて  
+    # """, unsafe_allow_html=True)
+    # st.divider()
+
 # ➀ 財務状況
 elif section == "➀ 財務状況":
     st.header(':blue[➀ 財務状況]')
@@ -895,32 +943,3 @@ elif section == "➂ 改善施策の提案":
 elif section == "➃ 今後に向けて":
     st.header(':blue[➃ 今後に向けて]')
     st.markdown("#### :gray[施策実行 → 効果検証 → フィードバック → PDCAサイクルを回し最適化を図る]")
-elif section == "★KPI確認用ダッシュボード":
-    graph_col, text_col = st.columns(2)
-    with graph_col:
-        st.write(mry_sls_pr_fig)  # 年別売上利益率
-    with text_col:
-        st.write(mry_mo_sls_fig)  # 月別売上/利益率
-    st.write(mrm_dly_sls_fig)  # 日別売上/利益率
-    st.divider()
-
-    graph_col, text_col = st.columns([1, 2])
-    with graph_col:
-        st.write(mry_Reg_sls_pr_fig)  # 地域別売上/利益率
-    with text_col:
-        st.write(mry_st_sls_fig)  # 州別売上
-        st.write(mry_st_pr_fig)  # 州別利益率
-    st.divider()
-    graph_col, text_col = st.columns([1, 1])
-    with graph_col:
-        st.write(mry_cat_sls_pr_fig)  # カテゴリ別売上/利益率
-    with text_col:
-        st.write(mry_subcat_sls_fig)  # サブカテゴリ別売上
-        st.write(mry_subcat_pr_fig)  # サブカテゴリ別利益率
-        st.write(mry_subcat_dr_fig)  # サブカテゴリ別割引実施割合
-    st.divider()
-    graph_col, text_col = st.columns([1, 1])
-    with graph_col:
-        st.write(mry_cust_fig)  # 新規/既存顧客数の推移
-    with text_col:
-        st.write(mry_rpt_fig)  # リピート率推移
